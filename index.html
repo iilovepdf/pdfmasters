@@ -17,28 +17,6 @@
      crossorigin="anonymous">
     </script>
     
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-PQNPPB23');</script>
-    <!-- End Google Tag Manager -->
-    
-    <!-- =================================================================== -->
-    <!-- PASTE YOUR GOOGLE ANALYTICS CODE HERE -->
-    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-XXXXXXXXXX');
-    </script> -->
-    <!-- =================================================================== -->
-
-    <!-- Google Search Console Verification -->
-    <meta name="google-site-verification" content="YourVerificationString" />
-
     <!-- External Libraries (CDNs) -->
     <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
@@ -51,56 +29,130 @@
     
     <style>
         :root {
-            --primary-red: #e5322d;
-            --primary-red-dark: #c42a25;
-            --text-dark: #383e45;
-            --text-light: #878d95;
-            --border-color: #e8e8f0;
-            --background-light: #f8f8fa;
+            --primary-color: #1a56db;
+            --primary-dark: #1e429f;
+            --primary-light: #3f83f8;
+            --text-dark: #111827;
+            --text-light: #6b7280;
+            --border-color: #e5e7eb;
+            --background-light: #f9fafb;
             --background-white: #ffffff;
             --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             --header-height: 70px;
+            --success-color: #10b981;
+            --danger-color: #ef4444;
+            --warning-color: #f59e0b;
+        }
+
+        /* Dark Mode Variables */
+        .dark-mode {
+            --primary-color: #3b82f6;
+            --primary-dark: #1d4ed8;
+            --primary-light: #60a5fa;
+            --text-dark: #f9fafb;
+            --text-light: #d1d5db;
+            --border-color: #4b5563;
+            --background-light: #111827;
+            --background-white: #1f2937;
+            --success-color: #10b981;
+            --danger-color: #ef4444;
+            --warning-color: #f59e0b;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
         html { scroll-behavior: smooth; }
-        body { font-family: var(--font-family); background-color: var(--background-light); color: var(--text-dark); line-height: 1.6; }
+        body { 
+            font-family: var(--font-family); 
+            background-color: var(--background-light); 
+            color: var(--text-dark); 
+            line-height: 1.6;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
 
         /* --- Header --- */
-        .main-header { background-color: var(--background-white); border-bottom: 1px solid var(--border-color); height: var(--header-height); position: sticky; top: 0; z-index: 999; transition: box-shadow 0.3s ease; }
+        .main-header { 
+            background-color: var(--background-white); 
+            border-bottom: 1px solid var(--border-color); 
+            height: var(--header-height); 
+            position: sticky; 
+            top: 0; 
+            z-index: 999; 
+            transition: all 0.3s ease; 
+        }
         .main-header.scrolled { box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
         .nav-container { display: flex; justify-content: space-between; align-items: center; height: 100%; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
         
-        /* Updated Logo Styling */
-        .logo { font-size: 1.8rem; font-weight: 800; color: var(--primary-red); text-decoration: none; display: flex; align-items: center; gap: 8px; letter-spacing: -1px; }
+        /* Logo Styling */
+        .logo { 
+            font-size: 1.8rem; 
+            font-weight: 800; 
+            color: var(--primary-color); 
+            text-decoration: none; 
+            display: flex; 
+            align-items: center; 
+            gap: 8px; 
+            letter-spacing: -1px; 
+        }
         .master-sticker { 
             display: inline-flex; 
             align-items: center; 
             justify-content: center;
-            background: #ffebe6;
+            background: linear-gradient(135deg, var(--primary-color), #2563eb);
             border-radius: 50%;
             width: 32px;
             height: 32px;
-            box-shadow: 0 2px 5px rgba(229, 50, 45, 0.2);
+            box-shadow: 0 2px 5px rgba(26, 86, 219, 0.2);
         }
-        .master-icon { width: 18px; height: 18px; fill: var(--primary-red); }
+        .master-icon { width: 18px; height: 18px; fill: white; }
         
         .main-nav ul { list-style: none; display: flex; gap: 30px; align-items: center; }
         .main-nav a { text-decoration: none; color: var(--text-dark); font-weight: 500; transition: color 0.2s ease; }
-        .main-nav a:hover { color: var(--primary-red); }
+        .main-nav a:hover { color: var(--primary-color); }
         
         /* Auth Buttons in Header */
-        .auth-buttons { display: flex; gap: 10px; margin-left: 20px; }
+        .auth-buttons { display: flex; gap: 10px; margin-left: 20px; align-items: center; }
         .btn-login, .btn-signup { padding: 8px 20px; border-radius: 5px; font-weight: 600; font-size: 0.9rem; cursor: pointer; transition: all 0.3s ease; border: none; }
         .btn-login { background: transparent; color: var(--text-dark); border: 2px solid var(--border-color); }
-        .btn-login:hover { border-color: var(--primary-red); color: var(--primary-red); }
-        .btn-signup { background: var(--primary-red); color: white; border: 2px solid var(--primary-red); }
-        .btn-signup:hover { background: var(--primary-red-dark); border-color: var(--primary-red-dark); }
+        .btn-login:hover { border-color: var(--primary-color); color: var(--primary-color); }
+        .btn-signup { background: var(--primary-color); color: white; border: 2px solid var(--primary-color); }
+        .btn-signup:hover { background: var(--primary-dark); border-color: var(--primary-dark); }
+
+        /* Theme Toggle Button */
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text-dark);
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            margin-left: 10px;
+        }
+        .theme-toggle:hover {
+            background: var(--background-light);
+        }
+        .theme-icon {
+            width: 20px;
+            height: 20px;
+        }
+        .theme-icon.sun {
+            display: none;
+        }
+        .dark-mode .theme-icon.sun {
+            display: block;
+        }
+        .dark-mode .theme-icon.moon {
+            display: none;
+        }
         
         /* User Profile in Header (when logged in) */
         .user-profile { display: flex; align-items: center; gap: 10px; cursor: pointer; padding: 8px 12px; border-radius: 6px; transition: background 0.3s ease; }
         .user-profile:hover { background: rgba(0,0,0,0.05); }
-        .profile-avatar { width: 36px; height: 36px; background: linear-gradient(135deg, var(--primary-red), #ff6b6b); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 0.9rem; }
+        .dark-mode .user-profile:hover { background: rgba(255,255,255,0.1); }
+        .profile-avatar { width: 36px; height: 36px; background: linear-gradient(135deg, var(--primary-color), var(--primary-light)); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 0.9rem; }
         .profile-name { font-weight: 600; font-size: 0.9rem; color: var(--text-dark); }
         
         .hamburger { display: none; cursor: pointer; }
@@ -120,419 +172,158 @@
         /* --- Tools Grid --- */
         .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
         .tools-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; }
-        .tool-card { background-color: var(--background-white); border: 1px solid var(--border-color); border-radius: 8px; padding: 25px; text-align: center; cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s ease; position: relative; overflow: hidden; opacity: 0; transform: translateY(20px); }
-        .tool-card.reveal { animation: slideUp 0.5s forwards; }
-        .tool-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05); border-color: var(--primary-red); }
-        .tool-card .icon { width: 50px; height: 50px; margin: 0 auto 15px auto; display: flex; align-items: center; justify-content: center; font-size: 2em; color: var(--primary-red); }
+        .tool-card { 
+            background-color: var(--background-white); 
+            border: 1px solid var(--border-color); 
+            border-radius: 8px; 
+            padding: 25px; 
+            text-align: center; 
+            cursor: pointer; 
+            transition: transform 0.2s ease, box-shadow 0.2s ease; 
+            position: relative; 
+            overflow: hidden; 
+        }
+        .tool-card:hover { 
+            transform: translateY(-5px); 
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); 
+            border-color: var(--primary-color); 
+        }
+        .tool-card .icon { width: 50px; height: 50px; margin: 0 auto 15px auto; display: flex; align-items: center; justify-content: center; font-size: 2em; color: var(--primary-color); }
         .tool-card h3 { font-size: 1.2rem; margin-bottom: 8px; color: var(--text-dark); }
         .tool-card p { font-size: 0.9rem; color: var(--text-light); }
-        .new-badge { position: absolute; top: 10px; right: -35px; background-color: var(--primary-red); color: white; padding: 2px 30px; font-size: 0.8rem; font-weight: bold; transform: rotate(45deg); }
+        .new-badge { position: absolute; top: 10px; right: -35px; background-color: var(--primary-color); color: white; padding: 2px 30px; font-size: 0.8rem; font-weight: bold; transform: rotate(45deg); }
 
         /* --- Article Section --- */
         .article-section { background-color: var(--background-white); padding: 60px 0; margin-top: 60px; border-top: 1px solid var(--border-color); }
         .article-content { max-width: 800px; margin: 0 auto; }
-        .article-content h2 { font-size: 2rem; margin-bottom: 20px; color: var(--primary-red); }
+        .article-content h2 { font-size: 2rem; margin-bottom: 20px; color: var(--primary-color); }
         .article-content h3 { font-size: 1.5rem; margin-top: 40px; margin-bottom: 15px; }
-        .article-content p, .article-content li { margin-bottom: 15px; }
-        .article-content ul { list-style-position: inside; padding-left: 20px; }
 
         /* --- Modal --- */
-        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.6); align-items: center; justify-content: center; }
+        .modal { 
+            display: none; 
+            position: fixed; 
+            z-index: 1000; 
+            left: 0; 
+            top: 0; 
+            width: 100%; 
+            height: 100%; 
+            overflow: auto; 
+            background-color: rgba(0,0,0,0.6); 
+            align-items: center; 
+            justify-content: center; 
+        }
         .modal.active { display: flex; }
         .modal-content-wrapper { display: flex; align-items: flex-start; max-height: 90vh; }
-        .modal-content { background-color: var(--background-light); padding: 30px; border-radius: 8px; width: 95%; max-width: 800px; overflow-y: auto; text-align: center; position: relative; animation: fadeIn 0.3s ease; display: flex; flex-direction: column; max-height: 90vh; }
-        .close-button { position: absolute; top: 15px; right: 15px; color: #aaa; font-size: 28px; font-weight: bold; cursor: pointer; }
-        .close-button:hover { color: black; }
+        .modal-content { 
+            background-color: var(--background-white); 
+            color: var(--text-dark);
+            padding: 30px; 
+            border-radius: 8px; 
+            width: 95%; 
+            max-width: 800px; 
+            overflow-y: auto; 
+            text-align: center; 
+            position: relative; 
+            animation: fadeIn 0.3s ease; 
+            display: flex; 
+            flex-direction: column; 
+            max-height: 90vh; 
+        }
+        .close-button { position: absolute; top: 15px; right: 15px; color: var(--text-light); font-size: 28px; font-weight: bold; cursor: pointer; }
+        .close-button:hover { color: var(--primary-color); }
         
-        #drop-zone { border: 2px dashed var(--border-color); border-radius: 8px; padding: 40px; margin-bottom: 20px; cursor: pointer; transition: background-color 0.2s ease; background: white; }
-        #drop-zone.dragover { background-color: #ffebe6; border-color: var(--primary-red); }
-        .select-file-btn { background-color: var(--primary-red); color: white; padding: 12px 25px; border: none; border-radius: 5px; font-size: 1rem; font-weight: bold; cursor: pointer; margin-top: 10px; }
-        .select-file-btn:hover { background-color: var(--primary-red-dark); }
+        #drop-zone { 
+            border: 2px dashed var(--border-color); 
+            border-radius: 8px; 
+            padding: 40px; 
+            margin-bottom: 20px; 
+            cursor: pointer; 
+            transition: all 0.2s ease; 
+            background: var(--background-light); 
+        }
+        #drop-zone.dragover { background-color: rgba(26, 86, 219, 0.1); border-color: var(--primary-color); }
+        .select-file-btn { 
+            background-color: var(--primary-color); 
+            color: white; 
+            padding: 12px 25px; 
+            border: none; 
+            border-radius: 5px; 
+            font-size: 1rem; 
+            font-weight: bold; 
+            cursor: pointer; 
+            margin-top: 10px; 
+            transition: background-color 0.2s ease;
+        }
+        .select-file-btn:hover { background-color: var(--primary-dark); }
         
         #file-list { list-style: none; margin-top: 10px; text-align: left; max-height: 150px; overflow-y: auto; }
-        #file-list li { background: white; padding: 8px; border: 1px solid var(--border-color); border-radius: 4px; margin-bottom: 5px; display: flex; justify-content: space-between; align-items: center; font-size: 0.9rem; }
-        #file-list span.remove { color: red; cursor: pointer; font-weight: bold; padding: 0 5px; }
+        #file-list li { background: var(--background-light); padding: 8px; border: 1px solid var(--border-color); border-radius: 4px; margin-bottom: 5px; display: flex; justify-content: space-between; align-items: center; font-size: 0.9rem; }
+        #file-list span.remove { color: var(--danger-color); cursor: pointer; font-weight: bold; padding: 0 5px; }
 
-        #tool-options { margin: 20px 0; text-align: left; padding: 15px; background: white; border-radius: 4px; border: 1px solid var(--border-color); }
-        #tool-options label { display: block; margin-bottom: 5px; font-weight: 600; font-size: 0.9rem; }
-        #tool-options input, #tool-options select { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; margin-bottom: 10px; }
-        .disclaimer { font-size: 0.8rem; color: #666; margin-top: 5px; font-style: italic; }
+        #tool-options { margin: 20px 0; text-align: left; padding: 15px; background: var(--background-light); border-radius: 4px; border: 1px solid var(--border-color); }
+        #tool-options label { display: block; margin-bottom: 5px; font-weight: 600; font-size: 0.9rem; color: var(--text-dark); }
+        #tool-options input, #tool-options select, #tool-options textarea { 
+            width: 100%; 
+            padding: 8px; 
+            border: 1px solid var(--border-color); 
+            border-radius: 4px; 
+            margin-bottom: 10px; 
+            background: var(--background-white);
+            color: var(--text-dark);
+        }
+        .disclaimer { font-size: 0.8rem; color: var(--text-light); margin-top: 5px; font-style: italic; }
 
-        #process-btn { width: 100%; background-color: var(--primary-red); color: white; padding: 15px; border: none; border-radius: 5px; font-size: 1.2rem; font-weight: bold; cursor: pointer; transition: background-color 0.2s; }
-        #process-btn:disabled { background-color: #ccc; cursor: not-allowed; }
+        #process-btn { 
+            width: 100%; 
+            background-color: var(--primary-color); 
+            color: white; 
+            padding: 15px; 
+            border: none; 
+            border-radius: 5px; 
+            font-size: 1.2rem; 
+            font-weight: bold; 
+            cursor: pointer; 
+            transition: background-color 0.2s; 
+        }
+        #process-btn:disabled { background-color: var(--border-color); color: var(--text-light); cursor: not-allowed; }
+        #process-btn:not(:disabled):hover { background-color: var(--primary-dark); }
         
         #output-area { margin-top: 20px; }
-        .download-link { display: inline-block; background-color: #28a745; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none; font-weight: bold; margin-top: 10px; }
+        .download-link { 
+            display: inline-block; 
+            background-color: var(--success-color); 
+            color: white; 
+            padding: 10px 20px; 
+            border-radius: 5px; 
+            text-decoration: none; 
+            font-weight: bold; 
+            margin-top: 10px; 
+            transition: background-color 0.2s ease;
+        }
+        .download-link:hover { background-color: #0da271; }
 
         /* --- Loader --- */
         .loader-container { display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255, 255, 255, 0.9); z-index: 1001; align-items: center; justify-content: center; flex-direction: column; border-radius: 8px; }
+        .dark-mode .loader-container { background: rgba(31, 41, 55, 0.9); }
         .loader-container.active { display: flex; }
-        .loader { border: 5px solid #f3f3f3; border-top: 5px solid var(--primary-red); border-radius: 50%; width: 50px; height: 50px; animation: spin 1s linear infinite; }
+        .loader { border: 5px solid var(--border-color); border-top: 5px solid var(--primary-color); border-radius: 50%; width: 50px; height: 50px; animation: spin 1s linear infinite; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         @keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
-        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* --- Auth Modal --- */
-        .auth-modal .auth-modal-content {
-            background: white;
-            padding: 30px;
-            border-radius: 12px;
-            width: 100%;
-            max-width: 450px;
-            position: relative;
-            animation: fadeIn 0.3s ease;
-        }
-
-        .auth-tabs {
-            display: flex;
-            border-bottom: 2px solid var(--border-color);
-            margin-bottom: 30px;
-        }
-
-        .auth-tab {
-            flex: 1;
-            padding: 15px;
-            background: none;
-            border: none;
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--text-light);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .auth-tab.active {
-            color: var(--primary-red);
-        }
-
-        .auth-tab.active::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: var(--primary-red);
-        }
-
-        .auth-form {
-            display: none;
-        }
-
-        .auth-form.active {
-            display: block;
-        }
-
-        .auth-form h2 {
-            color: var(--text-dark);
-            margin-bottom: 10px;
-            font-size: 1.8rem;
-        }
-
-        .auth-form p {
-            color: var(--text-light);
-            margin-bottom: 25px;
-            font-size: 0.95rem;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: var(--text-dark);
-            font-size: 0.9rem;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 12px 15px;
-            border: 2px solid var(--border-color);
-            border-radius: 6px;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .form-group input:focus {
-            outline: none;
-            border-color: var(--primary-red);
-            box-shadow: 0 0 0 3px rgba(229, 50, 45, 0.1);
-        }
-
-        .password-toggle {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-top: 8px;
-            font-size: 0.85rem;
-            color: var(--text-light);
-        }
-
-        .password-toggle input[type="checkbox"] {
-            width: auto;
-        }
-
-        .form-options {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 25px;
-        }
-
-        .remember-me, .terms-checkbox {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.9rem;
-            color: var(--text-dark);
-        }
-
-        .remember-me input, .terms-checkbox input {
-            width: auto;
-        }
-
-        .forgot-password {
-            color: var(--primary-red);
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 500;
-        }
-
-        .forgot-password:hover {
-            text-decoration: underline;
-        }
-
-        .auth-submit-btn {
-            width: 100%;
-            padding: 14px;
-            background: var(--primary-red);
-            color: white;
-            border: none;
-            border-radius: 6px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
-
-        .auth-submit-btn:hover {
-            background: var(--primary-red-dark);
-        }
-
-        .social-login {
-            margin-top: 30px;
-            text-align: center;
-        }
-
-        .social-login p {
-            color: var(--text-light);
-            margin-bottom: 15px;
-            position: relative;
-        }
-
-        .social-login p::before,
-        .social-login p::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            width: 30%;
-            height: 1px;
-            background: var(--border-color);
-        }
-
-        .social-login p::before {
-            left: 0;
-        }
-
-        .social-login p::after {
-            right: 0;
-        }
-
-        .social-buttons {
-            display: flex;
-            gap: 15px;
-        }
-
-        .social-btn {
-            flex: 1;
-            padding: 12px;
-            border: 2px solid var(--border-color);
-            background: white;
-            border-radius: 6px;
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            transition: all 0.3s ease;
-        }
-
-        .social-btn.google-btn:hover {
-            border-color: #DB4437;
-            background: rgba(219, 68, 55, 0.05);
-        }
-
-        .social-btn.facebook-btn:hover {
-            border-color: #4267B2;
-            background: rgba(66, 103, 178, 0.05);
-        }
-
-        .password-requirements {
-            margin-top: 10px;
-            padding: 15px;
-            background: var(--background-light);
-            border-radius: 6px;
-            font-size: 0.85rem;
-        }
-
-        .password-requirements p {
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: var(--text-dark);
-        }
-
-        .password-requirements ul {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        .password-requirements li {
-            margin-bottom: 5px;
-            color: var(--text-light);
-            display: flex;
-            align-items: center;
-        }
-
-        .password-requirements li::before {
-            content: '✗';
-            margin-right: 8px;
-            color: #ff6b6b;
-        }
-
-        .password-requirements li.valid::before {
-            content: '✓';
-            color: #28a745;
-        }
-
-        .back-to-login {
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        .back-to-login-btn {
-            color: var(--primary-red);
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        .back-to-login-btn:hover {
-            text-decoration: underline;
-        }
-
-        /* User Dropdown */
-        .user-dropdown {
-            position: fixed;
-            top: 80px;
-            right: 20px;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
-            display: none;
-            z-index: 1001;
-            min-width: 280px;
-            animation: fadeIn 0.3s ease;
-        }
-
-        .user-dropdown.active {
-            display: block;
-        }
-
-        .dropdown-content {
-            padding: 20px;
-        }
-
-        .user-info {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 20px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .user-avatar {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, var(--primary-red), #ff6b6b);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-
-        .user-details h3 {
-            font-size: 1rem;
-            margin-bottom: 5px;
-            color: var(--text-dark);
-        }
-
-        .user-details p {
-            font-size: 0.85rem;
-            color: var(--text-light);
-        }
-
-        .dropdown-menu {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-        }
-
-        .dropdown-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px 15px;
-            color: var(--text-dark);
-            text-decoration: none;
-            border-radius: 6px;
-            transition: all 0.2s ease;
-        }
-
-        .dropdown-item:hover {
-            background: var(--background-light);
-            color: var(--primary-red);
-        }
-
-        .dropdown-item svg {
-            color: var(--text-light);
-        }
-
-        .dropdown-item:hover svg {
-            color: var(--primary-red);
-        }
-
-        .dropdown-divider {
-            height: 1px;
-            background: var(--border-color);
-            margin: 10px 0;
-        }
 
         /* --- Footer --- */
-        .main-footer { background-color: var(--text-dark); color: #ccc; padding: 50px 0 20px 0; margin-top: 60px; }
+        .main-footer { 
+            background-color: #111827; 
+            color: #ccc; 
+            padding: 50px 0 20px 0; 
+            margin-top: 60px; 
+        }
         .footer-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; }
-        .footer-col h4 { color: var(--background-white); margin-bottom: 15px; }
+        .footer-col h4 { color: white; margin-bottom: 15px; }
         .footer-col ul { list-style: none; }
         .footer-col li { margin-bottom: 10px; }
         .footer-col a { color: #ccc; text-decoration: none; }
-        .footer-col a:hover { color: var(--background-white); }
+        .footer-col a:hover { color: white; }
         .copyright { text-align: center; border-top: 1px solid #555; padding-top: 20px; margin-top: 40px; font-size: 0.9rem; }
 
         /* --- Responsive --- */
@@ -547,65 +338,36 @@
             .hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
             .ad-modal-sidebar { display: none; }
             .hero-section h1 { font-size: 2.2rem; }
-            .user-dropdown { position: fixed; top: auto; bottom: 0; left: 0; right: 0; border-radius: 12px 12px 0 0; max-height: 80vh; overflow-y: auto; }
-            .social-buttons { flex-direction: column; }
-            .auth-modal .auth-modal-content { margin: 20px; padding: 25px; }
-        }
-        
-        /* Auth Message */
-        .auth-message {
-            padding: 12px 20px;
-            border-radius: 6px;
-            margin-bottom: 20px;
-            font-weight: 500;
-            display: none;
-        }
-        
-        .auth-message.success {
-            background: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-            display: block;
-        }
-        
-        .auth-message.error {
-            background: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-            display: block;
         }
     </style>
 </head>
 <body>
-    <!-- AMP Auto Ads Container -->
-    <amp-auto-ads type="adsense"
-        data-ad-client="ca-pub-3535670686155810">
-    </amp-auto-ads>
-    
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PQNPPB23"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
-
     <header class="main-header" id="main-header">
         <div class="nav-container">
             <a href="#" class="logo">
-    pdfmasters
-    <span class="master-sticker">
-        <svg class="master-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-        </svg>
-    </span>
-</a>
+                pdfmasters
+                <span class="master-sticker">
+                    <svg class="master-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                    </svg>
+                </span>
+            </a>
             <nav class="main-nav" id="main-nav">
                 <ul>
                     <li><a href="#">Home</a></li>
                     <li><a href="#all-tools">All Tools</a></li>
                     <li><a href="#about-us">About Us</a></li>
                     <li><a href="#contact">Contact Us</a></li>
-                    <!-- Auth buttons will be dynamically added here -->
                 </ul>
             </nav>
+            <button class="theme-toggle" id="theme-toggle">
+                <svg class="theme-icon moon" viewBox="0 0 24 24" width="20" height="20">
+                    <path fill="currentColor" d="M12 3a9 9 0 109 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 01-4.4 2.26 5.403 5.403 0 01-3.14-9.8c-.44-.06-.9-.1-1.36-.1z"/>
+                </svg>
+                <svg class="theme-icon sun" viewBox="0 0 24 24" width="20" height="20">
+                    <path fill="currentColor" d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58c-.39-.39-1.03-.39-1.41 0-.39.39-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37c-.39-.39-1.03-.39-1.41 0-.39.39-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0 .39-.39.39-1.03 0-1.41l-1.06-1.06zm1.06-10.96c.39-.39.39-1.03 0-1.41-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06zM7.05 18.36c.39-.39.39-1.03 0-1.41-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06z"/>
+                </svg>
+            </button>
             <div class="hamburger" id="hamburger">
                 <span class="bar"></span>
                 <span class="bar"></span>
@@ -621,37 +383,9 @@
         </div>
     </section>
 
-    <!-- Top Banner Ad -->
-    <div class="ad-container ad-banner-top">
-        <!-- google ads pdfmasters -->
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-3535670686155810"
-             data-ad-slot="3081571204"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
-        <script>
-             (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-    </div>
-
     <main class="container" id="all-tools">
         <div class="tools-grid" id="tools-grid">
-            <!-- Tools will be injected here via JS -->
-        </div>
-        
-        <!-- Middle Banner Ad -->
-        <div class="ad-container ad-between-tools">
-            <!-- google ads pdfmasters -->
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-3535670686155810"
-                 data-ad-slot="3081571204"
-                 data-ad-format="auto"
-                 data-full-width-responsive="true"></ins>
-            <script>
-                 (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
+            <!-- Tools will be loaded here -->
         </div>
     </main>
     
@@ -680,7 +414,7 @@
                 
                 <div id="drop-zone">
                     <p>Drag & drop files here, or</p>
-                    <button class="select-file-btn">Select PDF Files</button>
+                    <button class="select-file-btn">Select Files</button>
                     <input type="file" id="file-input" style="display: none;" multiple>
                 </div>
 
@@ -697,221 +431,6 @@
                     <p id="loader-text" style="margin-top:15px; font-weight:bold;">Processing...</p>
                 </div>
             </div>
-            
-            <!-- Modal Sidebar Ad -->
-            <div class="ad-container ad-modal-sidebar">
-                <!-- google ads pdfmasters -->
-                <ins class="adsbygoogle"
-                     style="display:block"
-                     data-ad-client="ca-pub-3535670686155810"
-                     data-ad-slot="3081571204"
-                     data-ad-format="auto"
-                     data-full-width-responsive="true"></ins>
-                <script>
-                     (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Login/Signup Modal -->
-    <div id="auth-modal" class="modal auth-modal">
-        <div class="auth-modal-content">
-            <span class="close-button" id="close-auth-modal">×</span>
-            
-            <!-- Auth Message Display -->
-            <div id="auth-message" class="auth-message"></div>
-            
-            <!-- Tabs -->
-            <div class="auth-tabs">
-                <button class="auth-tab active" data-tab="login">Log In</button>
-                <button class="auth-tab" data-tab="signup">Sign Up</button>
-            </div>
-            
-            <!-- Login Form -->
-            <div id="login-form" class="auth-form active">
-                <h2>Welcome Back!</h2>
-                <p>Log in to save your files and access premium features</p>
-                
-                <form id="loginForm">
-                    <div class="form-group">
-                        <label for="login-email">Email Address</label>
-                        <input type="email" id="login-email" placeholder="Enter your email" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="login-password">Password</label>
-                        <input type="password" id="login-password" placeholder="Enter your password" required>
-                        <div class="password-toggle">
-                            <input type="checkbox" id="show-login-password">
-                            <label for="show-login-password">Show Password</label>
-                        </div>
-                    </div>
-                    
-                    <div class="form-options">
-                        <label class="remember-me">
-                            <input type="checkbox" id="remember-me">
-                            <span>Remember me</span>
-                        </label>
-                        <a href="#" class="forgot-password">Forgot Password?</a>
-                    </div>
-                    
-                    <button type="submit" class="auth-submit-btn">Log In</button>
-                    
-                    <div class="social-login">
-                        <p>Or log in with</p>
-                        <div class="social-buttons">
-                            <button type="button" class="social-btn google-btn">
-                                <svg viewBox="0 0 24 24" width="18" height="18">
-                                    <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-                                    <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-                                    <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
-                                    <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
-                                </svg>
-                                Google
-                            </button>
-                            <button type="button" class="social-btn facebook-btn">
-                                <svg viewBox="0 0 24 24" width="18" height="18">
-                                    <path fill="#1877F2" d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                                </svg>
-                                Facebook
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            
-            <!-- Signup Form -->
-            <div id="signup-form" class="auth-form">
-                <h2>Create Account</h2>
-                <p>Sign up to unlock all features and save your work</p>
-                
-                <form id="signupForm">
-                    <div class="form-group">
-                        <label for="signup-name">Full Name</label>
-                        <input type="text" id="signup-name" placeholder="Enter your full name" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="signup-email">Email Address</label>
-                        <input type="email" id="signup-email" placeholder="Enter your email" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="signup-password">Password</label>
-                        <input type="password" id="signup-password" placeholder="Create a password" required>
-                        <div class="password-requirements">
-                            <p>Password must contain:</p>
-                            <ul>
-                                <li id="req-length">At least 8 characters</li>
-                                <li id="req-uppercase">One uppercase letter</li>
-                                <li id="req-number">One number</li>
-                                <li id="req-special">One special character</li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="confirm-password">Confirm Password</label>
-                        <input type="password" id="confirm-password" placeholder="Confirm your password" required>
-                        <div class="password-toggle">
-                            <input type="checkbox" id="show-signup-password">
-                            <label for="show-signup-password">Show Password</label>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="terms-checkbox">
-                            <input type="checkbox" id="agree-terms" required>
-                            <span>I agree to the <a href="terms-of-service.html" target="_blank">Terms of Service</a> and <a href="privacy-policy.html" target="_blank">Privacy Policy</a></span>
-                        </label>
-                    </div>
-                    
-                    <button type="submit" class="auth-submit-btn">Create Account</button>
-                    
-                    <div class="social-login">
-                        <p>Or sign up with</p>
-                        <div class="social-buttons">
-                            <button type="button" class="social-btn google-btn">
-                                <svg viewBox="0 0 24 24" width="18" height="18">
-                                    <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-                                    <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-                                    <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
-                                    <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
-                                </svg>
-                                Google
-                            </button>
-                            <button type="button" class="social-btn facebook-btn">
-                                <svg viewBox="0 0 24 24" width="18" height="18">
-                                    <path fill="#1877F2" d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                                </svg>
-                                Facebook
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            
-            <!-- Forgot Password Form -->
-            <div id="forgot-password-form" class="auth-form">
-                <h2>Reset Password</h2>
-                <p>Enter your email address and we'll send you a link to reset your password</p>
-                
-                <form id="forgotPasswordForm">
-                    <div class="form-group">
-                        <label for="forgot-email">Email Address</label>
-                        <input type="email" id="forgot-email" placeholder="Enter your email" required>
-                    </div>
-                    
-                    <button type="submit" class="auth-submit-btn">Send Reset Link</button>
-                    
-                    <div class="back-to-login">
-                        <a href="#" class="back-to-login-btn">← Back to Log In</a>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <!-- User Profile Dropdown -->
-    <div id="user-profile-dropdown" class="user-dropdown">
-        <div class="dropdown-content">
-            <div class="user-info">
-                <div class="user-avatar">
-                    <span id="user-avatar-text">JD</span>
-                </div>
-                <div class="user-details">
-                    <h3 id="user-name">John Doe</h3>
-                    <p id="user-email">john@example.com</p>
-                </div>
-            </div>
-            <div class="dropdown-menu">
-                <a href="#" class="dropdown-item">
-                    <svg viewBox="0 0 24 24" width="18" height="18">
-                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-                    </svg>
-                    My Profile
-                </a>
-                <a href="#" class="dropdown-item">
-                    <svg viewBox="0 0 24 24" width="18" height="18">
-                        <path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1c-1.3 0-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm2 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
-                    </svg>
-                    Saved Files
-                </a>
-                <a href="#" class="dropdown-item">
-                    <svg viewBox="0 0 24 24" width="18" height="18">
-                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                    </svg>
-                    Premium Features
-                </a>
-                <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item" id="btn-logout">
-                    <svg viewBox="0 0 24 24" width="18" height="18">
-                        <path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/>
-                    </svg>
-                    Log Out
-                </a>
-            </div>
         </div>
     </div>
     
@@ -927,37 +446,25 @@
                     <li><a href="#all-tools">Merge PDF</a></li>
                     <li><a href="#all-tools">Split PDF</a></li>
                     <li><a href="#all-tools">Compress PDF</a></li>
+                    <li><a href="#all-tools">Convert PDF</a></li>
+                    <li><a href="#all-tools">Edit PDF</a></li>
                 </ul>
             </div>
             <div class="footer-col">
                 <h4>Company</h4>
                 <ul>
-                    <li><a href="about-us.html">About Us</a></li>
-                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
-                    <li><a href="terms-of-service.html">Terms of Service</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
                 </ul>
             </div>
             <div class="footer-col">
                 <h4>Contact</h4>
                 <ul>
                     <li><a href="mailto:pdfmasters@gmail.com">pdfmasters@gmail.com</a></li>
-                    <li><a href="https://wa.me/7978270687">WhatsApp: 12250-098754</a></li>
+                    <li><a href="#">Help & Support</a></li>
                 </ul>
             </div>
-        </div>
-        
-        <!-- Footer Ad -->
-        <div class="ad-container ad-between-tools">
-            <!-- google ads pdfmasters -->
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-3535670686155810"
-                 data-ad-slot="3081571204"
-                 data-ad-format="auto"
-                 data-full-width-responsive="true"></ins>
-            <script>
-                 (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
         </div>
         
         <div class="copyright container">
@@ -967,967 +474,626 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            
-            // --- Configuration & Utilities ---
-            pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
-            const { PDFDocument, rgb, degrees, StandardFonts } = PDFLib;
-
-            const state = {
-                currentToolId: null,
-                files: [],
-                pdfDoc: null
-            };
-
-            const utils = {
-                showLoader: (text = 'Processing...') => {
-                    document.getElementById('loader-text').innerText = text;
-                    document.querySelector('.loader-container').classList.add('active');
-                },
-                hideLoader: () => {
-                    document.querySelector('.loader-container').classList.remove('active');
-                },
-                showError: (msg) => {
-                    utils.hideLoader();
-                    alert(msg);
-                },
-                createDownloadLink: (blob, filename) => {
-                    const url = URL.createObjectURL(blob);
-                    const outputDiv = document.getElementById('output-area');
-                    outputDiv.innerHTML = '';
-                    const a = document.createElement('a');
-                    a.href = url;
-                    a.download = filename;
-                    a.className = 'download-link';
-                    a.innerText = `Download ${filename}`;
-                    outputDiv.appendChild(a);
-                },
-                readFileAsArrayBuffer: (file) => {
-                    return new Promise((resolve, reject) => {
-                        const reader = new FileReader();
-                        reader.onload = () => resolve(reader.result);
-                        reader.onerror = reject;
-                        reader.readAsArrayBuffer(file);
-                    });
-                },
-                readFileAsDataURL: (file) => {
-                    return new Promise((resolve, reject) => {
-                        const reader = new FileReader();
-                        reader.onload = () => resolve(reader.result);
-                        reader.onerror = reject;
-                        reader.readAsDataURL(file);
-                    });
-                }
-            };
-
-            // --- Tool Implementations ---
-            const tools = {
-                'merge-pdf': {
-                    title: 'Merge PDF',
-                    desc: 'Combine multiple PDFs into one unified document.',
-                    icon: '📑',
-                    accept: '.pdf',
-                    multiple: true,
-                    process: async (files) => {
-                        utils.showLoader('Merging PDFs...');
-                        const mergedPdf = await PDFDocument.create();
-                        for (const file of files) {
-                            const bytes = await utils.readFileAsArrayBuffer(file);
-                            const pdf = await PDFDocument.load(bytes);
-                            const copiedPages = await mergedPdf.copyPages(pdf, pdf.getPageIndices());
-                            copiedPages.forEach((page) => mergedPdf.addPage(page));
-                        }
-                        const pdfBytes = await mergedPdf.save();
-                        utils.createDownloadLink(new Blob([pdfBytes], { type: 'application/pdf' }), 'merged.pdf');
-                        utils.hideLoader();
-                    }
-                },
-                'split-pdf': {
-                    title: 'Split PDF',
-                    desc: 'Separate one page or a whole set for easy conversion.',
-                    icon: '✂️',
-                    accept: '.pdf',
-                    multiple: false,
-                    optionsUI: `<label>Page Ranges (e.g., "1-3, 5, 7-9"):</label><input type="text" id="split-range" placeholder="e.g. 1, 3-5">`,
-                    process: async (files) => {
-                        const rangeStr = document.getElementById('split-range').value;
-                        if (!rangeStr) return utils.showError('Please enter page ranges.');
-                        
-                        utils.showLoader('Splitting PDF...');
-                        const bytes = await utils.readFileAsArrayBuffer(files[0]);
-                        const pdfDoc = await PDFDocument.load(bytes);
-                        const newPdf = await PDFDocument.create();
-                        const totalPages = pdfDoc.getPageCount();
-                        
-                        // Parse Ranges
-                        const pagesToCopy = new Set();
-                        rangeStr.split(',').forEach(part => {
-                            const range = part.trim().split('-');
-                            if(range.length === 2) {
-                                for(let i = parseInt(range[0]); i <= parseInt(range[1]); i++) pagesToCopy.add(i-1);
-                            } else {
-                                pagesToCopy.add(parseInt(range[0])-1);
-                            }
-                        });
-
-                        const indices = Array.from(pagesToCopy).filter(i => i >= 0 && i < totalPages);
-                        if(indices.length === 0) return utils.showError('Invalid page range.');
-
-                        const copiedPages = await newPdf.copyPages(pdfDoc, indices);
-                        copiedPages.forEach(page => newPdf.addPage(page));
-                        
-                        const pdfBytes = await newPdf.save();
-                        utils.createDownloadLink(new Blob([pdfBytes], { type: 'application/pdf' }), 'split.pdf');
-                        utils.hideLoader();
-                    }
-                },
-                'compress-pdf': {
-                    title: 'Compress PDF',
-                    desc: 'Reduce file size while optimizing for maximal PDF quality.',
-                    icon: '🗜️',
-                    accept: '.pdf',
-                    multiple: false,
-                    optionsUI: `<label>Image Quality (0.1 - 1.0):</label><input type="range" id="comp-quality" min="0.1" max="1.0" step="0.1" value="0.5"><div class="disclaimer">Re-compresses images. Text remains vector.</div>`,
-                    process: async (files) => {
-                        utils.showLoader('Analyzing PDF...');
-                        setTimeout(async () => {
-                            const bytes = await utils.readFileAsArrayBuffer(files[0]);
-                            const pdfDoc = await PDFDocument.load(bytes);
-                            const pdfBytes = await pdfDoc.save(); 
-                            utils.createDownloadLink(new Blob([pdfBytes], { type: 'application/pdf' }), 'compressed_result.pdf');
-                            utils.hideLoader();
-                        }, 1500);
-                    }
-                },
-                'pdf-to-word': {
-                    title: 'PDF to Word',
-                    desc: 'Convert your PDF to editable Word documents.',
-                    icon: '📝',
-                    accept: '.pdf',
-                    multiple: false,
-                    process: async (files) => {
-                        utils.showLoader('Extracting text...');
-                        const data = await utils.readFileAsArrayBuffer(files[0]);
-                        const pdf = await pdfjsLib.getDocument({data}).promise;
-                        let text = "";
-                        for(let i=1; i<=pdf.numPages; i++){
-                            const page = await pdf.getPage(i);
-                            const content = await page.getTextContent();
-                            const strings = content.items.map(item => item.str);
-                            text += strings.join(" ") + "\n\n";
-                        }
-                        utils.createDownloadLink(new Blob([text], {type: 'text/plain'}), 'converted.txt');
-                        utils.hideLoader();
-                    }
-                },
-                'pdf-to-powerpoint': {
-                    title: 'PDF to Powerpoint',
-                    desc: 'Turn your PDF into an editable Powerpoint presentation.',
-                    icon: '📊',
-                    accept: '.pdf',
-                    multiple: false,
-                    process: async (files) => {
-                        utils.showLoader('Generating PPTX...');
-                        const pptx = new PptxGenJS();
-                        const data = await utils.readFileAsArrayBuffer(files[0]);
-                        const pdf = await pdfjsLib.getDocument({data}).promise;
-                        
-                        for(let i=1; i<=pdf.numPages; i++){
-                            utils.showLoader(`Processing page ${i}/${pdf.numPages}`);
-                            const page = await pdf.getPage(i);
-                            const viewport = page.getViewport({scale: 1.5});
-                            const canvas = document.createElement('canvas');
-                            const context = canvas.getContext('2d');
-                            canvas.height = viewport.height;
-                            canvas.width = viewport.width;
-                            
-                            await page.render({canvasContext: context, viewport: viewport}).promise;
-                            const imgData = canvas.toDataURL('image/png');
-                            
-                            const slide = pptx.addSlide();
-                            slide.addImage({ data: imgData, x:0, y:0, w:'100%', h:'100%' });
-                        }
-                        
-                        pptx.writeFile({ fileName: "converted.pptx" });
-                        utils.hideLoader();
-                        document.getElementById('output-area').innerHTML = "<p>Download started automatically.</p>";
-                    }
-                },
-                'word-to-pdf': {
-                    title: 'Word to PDF',
-                    desc: 'Make DOC and DOCX files easy to read by converting them to PDF.',
-                    icon: '📄',
-                    accept: '.docx',
-                    multiple: false,
-                    process: async (files) => {
-                        utils.showLoader('Converting...');
-                        const arrayBuffer = await utils.readFileAsArrayBuffer(files[0]);
-                        const result = await mammoth.convertToHtml({arrayBuffer: arrayBuffer});
-                        const element = document.createElement('div');
-                        element.innerHTML = result.value;
-                        element.style.padding = "20px";
-                        document.body.appendChild(element); 
-                        
-                        await html2pdf().from(element).save('word.pdf');
-                        document.body.removeChild(element);
-                        utils.hideLoader();
-                        document.getElementById('output-area').innerHTML = "<p>Download started automatically.</p>";
-                    }
-                },
-                'edit-pdf': {
-                    title: 'Edit PDF',
-                    desc: 'Add text, shapes, comments and highlights to your PDF file.',
-                    icon: '✏️',
-                    accept: '.pdf',
-                    multiple: false,
-                    optionsUI: `
-                        <div style="margin-bottom:10px;">
-                            <button id="add-text-btn" style="padding:5px;">Add Text</button>
-                            <button id="add-rect-btn" style="padding:5px;">Add Box</button>
-                            <input type="color" id="edit-color" value="#e5322d">
-                        </div>
-                        <div id="canvas-container" style="border:1px solid #ccc; overflow:auto; max-height:400px;">
-                            <canvas id="edit-canvas"></canvas>
-                        </div>
-                        <div class="disclaimer">Edits apply to the first page for this demo.</div>
-                    `,
-                    process: async (files) => {
-                        utils.showLoader('Applying edits...');
-                        const canvas = window.fabricCanvas;
-                        const dataURL = canvas.toDataURL({format: 'png'});
-                        
-                        const bytes = await utils.readFileAsArrayBuffer(files[0]);
-                        const pdfDoc = await PDFDocument.load(bytes);
-                        const page = pdfDoc.getPages()[0];
-                        
-                        const pngImage = await pdfDoc.embedPng(dataURL);
-                        const { width, height } = page.getSize();
-                        
-                        page.drawImage(pngImage, {
-                            x: 0,
-                            y: 0,
-                            width: width,
-                            height: height,
-                        });
-                        
-                        const pdfBytes = await pdfDoc.save();
-                        utils.createDownloadLink(new Blob([pdfBytes], { type: 'application/pdf' }), 'edited.pdf');
-                        utils.hideLoader();
-                    },
-                    onFileSelect: async (file) => {
-                        utils.showLoader('Loading Editor...');
-                        const data = await utils.readFileAsArrayBuffer(file);
-                        const pdf = await pdfjsLib.getDocument({data}).promise;
-                        const page = await pdf.getPage(1);
-                        const viewport = page.getViewport({scale: 1.0}); 
-                        
-                        const canvasEl = document.getElementById('edit-canvas');
-                        canvasEl.width = viewport.width;
-                        canvasEl.height = viewport.height;
-                        
-                        const context = canvasEl.getContext('2d');
-                        await page.render({canvasContext: context, viewport: viewport}).promise;
-                        
-                        const bgImage = canvasEl.toDataURL();
-                        if(window.fabricCanvas) window.fabricCanvas.dispose();
-                        const fCanvas = new fabric.Canvas('edit-canvas');
-                        window.fabricCanvas = fCanvas;
-                        
-                        fCanvas.setBackgroundImage(bgImage, fCanvas.renderAll.bind(fCanvas));
-                        fCanvas.setWidth(viewport.width);
-                        fCanvas.setHeight(viewport.height);
-
-                        document.getElementById('add-text-btn').onclick = () => {
-                            fCanvas.add(new fabric.IText('New Text', { left: 50, top: 50, fill: document.getElementById('edit-color').value }));
-                        };
-                        document.getElementById('add-rect-btn').onclick = () => {
-                            fCanvas.add(new fabric.Rect({ left: 100, top: 100, width: 50, height: 50, fill: 'transparent', stroke: document.getElementById('edit-color').value, strokeWidth: 2 }));
-                        };
-                        utils.hideLoader();
-                    }
-                },
-                'sign-pdf': {
-                    title: 'Sign PDF',
-                    desc: 'Sign yourself or request electronic signatures from others.',
-                    icon: '✍️',
-                    accept: '.pdf',
-                    multiple: false,
-                    optionsUI: `
-                        <p>Draw Signature:</p>
-                        <div style="border:1px solid #000;"><canvas id="sig-canvas" width="400" height="150"></canvas></div>
-                        <button id="clear-sig" style="margin-top:5px; padding:5px;">Clear</button>
-                    `,
-                    process: async (files) => {
-                        const canvas = window.sigCanvas;
-                        if(canvas.getObjects().length === 0) return utils.showError('Please sign first.');
-                        
-                        utils.showLoader('Signing...');
-                        const sigImg = canvas.toDataURL();
-                        
-                        const bytes = await utils.readFileAsArrayBuffer(files[0]);
-                        const pdfDoc = await PDFDocument.load(bytes);
-                        const pngImage = await pdfDoc.embedPng(sigImg);
-                        const page = pdfDoc.getPages()[0];
-                        
-                        page.drawImage(pngImage, {
-                            x: 50,
-                            y: 50,
-                            width: 150,
-                            height: 75,
-                        });
-                        
-                        const pdfBytes = await pdfDoc.save();
-                        utils.createDownloadLink(new Blob([pdfBytes], { type: 'application/pdf' }), 'signed.pdf');
-                        utils.hideLoader();
-                    },
-                    onFileSelect: () => {
-                        if(window.sigCanvas) window.sigCanvas.dispose();
-                        window.sigCanvas = new fabric.Canvas('sig-canvas', {isDrawingMode: true});
-                        window.sigCanvas.freeDrawingBrush.width = 3;
-                        window.sigCanvas.freeDrawingBrush.color = "black";
-                        document.getElementById('clear-sig').onclick = () => window.sigCanvas.clear();
-                    }
-                },
-                'watermark-pdf': {
-                    title: 'Watermark PDF',
-                    desc: 'Stamp an image or text over your PDF.',
-                    icon: '💧',
-                    accept: '.pdf',
-                    multiple: false,
-                    optionsUI: `<label>Watermark Text:</label><input type="text" id="wm-text" value="CONFIDENTIAL"><label>Opacity:</label><input type="range" id="wm-opacity" min="0.1" max="1" step="0.1" value="0.3">`,
-                    process: async (files) => {
-                        utils.showLoader('Adding Watermark...');
-                        const text = document.getElementById('wm-text').value;
-                        const opacity = parseFloat(document.getElementById('wm-opacity').value);
-                        
-                        const bytes = await utils.readFileAsArrayBuffer(files[0]);
-                        const pdfDoc = await PDFDocument.load(bytes);
-                        const font = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
-                        
-                        const pages = pdfDoc.getPages();
-                        for (const page of pages) {
-                            const { width, height } = page.getSize();
-                            page.drawText(text, {
-                                x: width / 4,
-                                y: height / 2,
-                                size: 50,
-                                font: font,
-                                color: rgb(0.5, 0.5, 0.5),
-                                opacity: opacity,
-                                rotate: degrees(45),
-                            });
-                        }
-                        
-                        const pdfBytes = await pdfDoc.save();
-                        utils.createDownloadLink(new Blob([pdfBytes], { type: 'application/pdf' }), 'watermarked.pdf');
-                        utils.hideLoader();
-                    }
-                },
-                'rotate-pdf': {
-                    title: 'Rotate PDF',
-                    desc: 'Rotate your PDFs the way you need them.',
-                    icon: '🔄',
-                    accept: '.pdf',
-                    multiple: false,
-                    optionsUI: `<label>Rotation:</label><select id="rot-deg"><option value="90">90 Degrees Clockwise</option><option value="180">180 Degrees</option><option value="270">270 Degrees Clockwise</option></select>`,
-                    process: async (files) => {
-                        utils.showLoader('Rotating...');
-                        const angle = parseInt(document.getElementById('rot-deg').value);
-                        
-                        const bytes = await utils.readFileAsArrayBuffer(files[0]);
-                        const pdfDoc = await PDFDocument.load(bytes);
-                        const pages = pdfDoc.getPages();
-                        pages.forEach(page => {
-                            const current = page.getRotation().angle;
-                            page.setRotation(degrees(current + angle));
-                        });
-                        
-                        const pdfBytes = await pdfDoc.save();
-                        utils.createDownloadLink(new Blob([pdfBytes], { type: 'application/pdf' }), 'rotated.pdf');
-                        utils.hideLoader();
-                    }
-                },
-                'jpg-to-pdf': {
-                    title: 'JPG to PDF',
-                    desc: 'Convert JPG images to PDF in seconds.',
-                    icon: '🖼️',
-                    accept: '.jpg, .jpeg, .png',
-                    multiple: true,
-                    process: async (files) => {
-                        utils.showLoader('Converting Images...');
-                        const pdfDoc = await PDFDocument.create();
-                        
-                        for (const file of files) {
-                            const bytes = await utils.readFileAsArrayBuffer(file);
-                            let image;
-                            if (file.type === 'image/jpeg') image = await pdfDoc.embedJpg(bytes);
-                            else image = await pdfDoc.embedPng(bytes);
-                            
-                            const page = pdfDoc.addPage([image.width, image.height]);
-                            page.drawImage(image, {x: 0, y: 0, width: image.width, height: image.height});
-                        }
-                        
-                        const pdfBytes = await pdfDoc.save();
-                        utils.createDownloadLink(new Blob([pdfBytes], { type: 'application/pdf' }), 'images.pdf');
-                        utils.hideLoader();
-                    }
-                },
-                // Placeholders
-                'pdf-to-jpg': { title: 'PDF to JPG', desc: 'Convert each PDF page into a JPG.', icon: '🖼️', accept: '.pdf', process: () => alert('Feature coming in full version.') },
-                'excel-to-pdf': { title: 'Excel to PDF', desc: 'Convert your Excel spreadsheets to PDF.', icon: '📊', accept: '.xlsx', process: () => alert('Feature coming in full version.') },
-                'pdf-to-excel': { title: 'PDF to Excel', desc: 'Pull data straight from PDFs into Excel.', icon: '📉', accept: '.pdf', process: () => alert('Feature coming in full version.') },
-                'unlock-pdf': { title: 'Unlock PDF', desc: 'Remove PDF password security.', icon: '🔓', accept: '.pdf', process: () => alert('Feature coming in full version.') },
-                'protect-pdf': { title: 'Protect PDF', desc: 'Encrypt your PDF with a password.', icon: '🔒', accept: '.pdf', process: () => alert('Feature coming in full version.') },
-                'organize-pdf': { title: 'Organize PDF', desc: 'Sort pages of your PDF file.', icon: '🏗️', accept: '.pdf', process: () => alert('Feature coming in full version.') },
-                'pdf-to-pdfa': { title: 'PDF to PDF/A', desc: 'Convert to PDF/A for archiving.', icon: '🏛️', accept: '.pdf', process: () => alert('Feature coming in full version.') },
-                'repair-pdf': { title: 'Repair PDF', desc: 'Recover data from a corrupted PDF.', icon: '🔧', accept: '.pdf', process: () => alert('Feature coming in full version.') },
-                'page-numbers': { title: 'Page Numbers', desc: 'Add page numbers into PDF.', icon: '🔢', accept: '.pdf', process: () => alert('Feature coming in full version.') },
-                'scan-pdf': { title: 'Scan to PDF', desc: 'Capture document from mobile.', icon: '📱', accept: '.pdf', process: () => alert('Feature coming in full version.') },
-                'ocr-pdf': { title: 'OCR PDF', desc: 'Make scanned PDFs searchable.', icon: '👁️', accept: '.pdf', process: () => alert('Feature coming in full version.') },
-                'compare-pdf': { title: 'Compare PDF', desc: 'Show side-by-side comparison.', icon: '⚖️', accept: '.pdf', process: () => alert('Feature coming in full version.') },
-                'redact-pdf': { title: 'Redact PDF', desc: 'Permanently remove sensitive info.', icon: '⬛', accept: '.pdf', process: () => alert('Feature coming in full version.') },
-                'crop-pdf': { title: 'Crop PDF', desc: 'Crop margins of PDF pages.', icon: '✂️', accept: '.pdf', process: () => alert('Feature coming in full version.') },
-                'share-pdf': { title: 'Share PDF', desc: 'Share PDF online.', icon: '🔗', accept: '.pdf', process: () => alert('Feature coming in full version.') },
-                'html-to-pdf': { title: 'HTML to PDF', desc: 'Convert webpages to PDF.', icon: '🌐', accept: '.html', process: () => alert('Feature coming in full version.') }
-            };
-
-            // --- UI Generation ---
-            const grid = document.getElementById('tools-grid');
-            Object.keys(tools).forEach((key, index) => {
-                const tool = tools[key];
-                const div = document.createElement('div');
-                div.className = 'tool-card';
-                div.style.animationDelay = `${index * 50}ms`;
-                div.innerHTML = `
-                    <div class="icon">${tool.icon}</div>
-                    <h3>${tool.title}</h3>
-                    <p>${tool.desc}</p>
-                    ${index < 3 ? '<div class="new-badge">New!</div>' : ''}
-                `;
-                div.addEventListener('click', () => openModal(key));
-                grid.appendChild(div);
-                
-                setTimeout(() => div.classList.add('reveal'), 100);
+            // Theme Toggle
+            const themeToggle = document.getElementById('theme-toggle');
+            themeToggle.addEventListener('click', () => {
+                document.body.classList.toggle('dark-mode');
+                localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
             });
 
-            // --- Modal Logic ---
-            const modal = document.getElementById('tool-modal');
-            const fileInput = document.getElementById('file-input');
-            const fileList = document.getElementById('file-list');
-            const dropZone = document.getElementById('drop-zone');
-            const processBtn = document.getElementById('process-btn');
-
-            function openModal(toolId) {
-                state.currentToolId = toolId;
-                state.files = [];
-                const tool = tools[toolId];
-                
-                document.getElementById('modal-title').innerText = tool.title;
-                document.getElementById('tool-options').innerHTML = tool.optionsUI || '';
-                fileInput.accept = tool.accept || '*/*';
-                fileInput.multiple = tool.multiple || false;
-                
-                renderFileList();
-                document.getElementById('output-area').innerHTML = '';
-                modal.classList.add('active');
+            // Load saved theme
+            if (localStorage.getItem('theme') === 'dark') {
+                document.body.classList.add('dark-mode');
             }
 
-            document.getElementById('close-modal').onclick = () => {
-                modal.classList.remove('active');
-                if(window.fabricCanvas) window.fabricCanvas.dispose();
-            };
-
-            dropZone.addEventListener('click', () => fileInput.click());
-            dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('dragover'); });
-            dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
-            dropZone.addEventListener('drop', (e) => {
-                e.preventDefault();
-                dropZone.classList.remove('dragover');
-                handleFiles(e.dataTransfer.files);
-            });
-            fileInput.addEventListener('change', (e) => handleFiles(e.target.files));
-            document.querySelector('.select-file-btn').addEventListener('click', (e) => {
-                e.stopPropagation();
-                fileInput.click();
-            });
-
-            function handleFiles(files) {
-                const tool = tools[state.currentToolId];
-                if(tool.multiple) {
-                    state.files = [...state.files, ...Array.from(files)];
-                } else {
-                    state.files = [files[0]];
-                }
-                renderFileList();
-                if(tool.onFileSelect && state.files.length > 0) {
-                    tool.onFileSelect(state.files[0]);
-                }
-            }
-
-            function renderFileList() {
-                fileList.innerHTML = '';
-                state.files.forEach((file, index) => {
-                    const li = document.createElement('li');
-                    li.innerHTML = `${file.name} <span class="remove" data-index="${index}">×</span>`;
-                    fileList.appendChild(li);
-                });
-                
-                processBtn.disabled = state.files.length === 0;
-                
-                document.querySelectorAll('.remove').forEach(span => {
-                    span.addEventListener('click', (e) => {
-                        const idx = parseInt(e.target.dataset.index);
-                        state.files.splice(idx, 1);
-                        renderFileList();
-                    });
-                });
-            }
-
-            processBtn.addEventListener('click', async () => {
-                const tool = tools[state.currentToolId];
-                try {
-                    await tool.process(state.files);
-                } catch (e) {
-                    console.error(e);
-                    utils.showError('An error occurred during processing. Please try again.');
-                }
-            });
-
-            const header = document.getElementById('main-header');
+            // Mobile Navigation
             const hamburger = document.getElementById('hamburger');
             const nav = document.getElementById('main-nav');
-
-            window.addEventListener('scroll', () => {
-                if(window.scrollY > 50) header.classList.add('scrolled');
-                else header.classList.remove('scrolled');
-            });
-
             hamburger.addEventListener('click', () => {
                 hamburger.classList.toggle('active');
                 nav.classList.toggle('active');
             });
-            
-            nav.querySelectorAll('a').forEach(a => {
-                a.addEventListener('click', () => {
+
+            // Close mobile menu when clicking links
+            document.querySelectorAll('.main-nav a').forEach(link => {
+                link.addEventListener('click', () => {
                     hamburger.classList.remove('active');
                     nav.classList.remove('active');
                 });
             });
 
-            // ========== AUTHENTICATION SYSTEM ==========
-            const authState = {
-                isLoggedIn: false,
-                currentUser: null
-            };
-
-            // Initialize auth system
-            function initAuthSystem() {
-                // Check if user is already logged in
-                const savedUser = localStorage.getItem('pdfmasters_user');
-                if (savedUser) {
-                    try {
-                        const user = JSON.parse(savedUser);
-                        authState.isLoggedIn = true;
-                        authState.currentUser = user;
-                        updateUIForLoggedInUser();
-                    } catch (e) {
-                        localStorage.removeItem('pdfmasters_user');
-                    }
+            // Tool Definitions
+            const tools = [
+                {
+                    id: 'merge-pdf',
+                    title: 'Merge PDF',
+                    desc: 'Combine multiple PDFs into one unified document.',
+                    icon: '📑',
+                    accept: '.pdf',
+                    multiple: true
+                },
+                {
+                    id: 'split-pdf',
+                    title: 'Split PDF',
+                    desc: 'Separate one page or a whole set for easy conversion.',
+                    icon: '✂️',
+                    accept: '.pdf',
+                    multiple: false
+                },
+                {
+                    id: 'compress-pdf',
+                    title: 'Compress PDF',
+                    desc: 'Reduce file size while optimizing for maximal PDF quality.',
+                    icon: '🗜️',
+                    accept: '.pdf',
+                    multiple: false
+                },
+                {
+                    id: 'pdf-to-word',
+                    title: 'PDF to Word',
+                    desc: 'Convert your PDF to editable Word documents.',
+                    icon: '📝',
+                    accept: '.pdf',
+                    multiple: false
+                },
+                {
+                    id: 'pdf-to-powerpoint',
+                    title: 'PDF to Powerpoint',
+                    desc: 'Turn your PDF into an editable Powerpoint presentation.',
+                    icon: '📊',
+                    accept: '.pdf',
+                    multiple: false
+                },
+                {
+                    id: 'word-to-pdf',
+                    title: 'Word to PDF',
+                    desc: 'Make DOC and DOCX files easy to read by converting them to PDF.',
+                    icon: '📄',
+                    accept: '.doc,.docx',
+                    multiple: false
+                },
+                {
+                    id: 'edit-pdf',
+                    title: 'Edit PDF',
+                    desc: 'Add text, shapes, comments and highlights to your PDF file.',
+                    icon: '✏️',
+                    accept: '.pdf',
+                    multiple: false
+                },
+                {
+                    id: 'sign-pdf',
+                    title: 'Sign PDF',
+                    desc: 'Sign yourself or request electronic signatures from others.',
+                    icon: '✍️',
+                    accept: '.pdf',
+                    multiple: false
+                },
+                {
+                    id: 'watermark-pdf',
+                    title: 'Watermark PDF',
+                    desc: 'Stamp an image or text over your PDF.',
+                    icon: '💧',
+                    accept: '.pdf',
+                    multiple: false
+                },
+                {
+                    id: 'rotate-pdf',
+                    title: 'Rotate PDF',
+                    desc: 'Rotate your PDFs the way you need them.',
+                    icon: '🔄',
+                    accept: '.pdf',
+                    multiple: false
+                },
+                {
+                    id: 'jpg-to-pdf',
+                    title: 'JPG to PDF',
+                    desc: 'Convert JPG images to PDF in seconds.',
+                    icon: '🖼️',
+                    accept: '.jpg,.jpeg,.png',
+                    multiple: true
+                },
+                {
+                    id: 'pdf-to-jpg',
+                    title: 'PDF to JPG',
+                    desc: 'Convert each PDF page into a JPG.',
+                    icon: '🖼️',
+                    accept: '.pdf',
+                    multiple: false
+                },
+                {
+                    id: 'excel-to-pdf',
+                    title: 'Excel to PDF',
+                    desc: 'Convert your Excel spreadsheets to PDF.',
+                    icon: '📊',
+                    accept: '.xlsx,.xls',
+                    multiple: false
+                },
+                {
+                    id: 'pdf-to-excel',
+                    title: 'PDF to Excel',
+                    desc: 'Pull data straight from PDFs into Excel.',
+                    icon: '📉',
+                    accept: '.pdf',
+                    multiple: false
+                },
+                {
+                    id: 'unlock-pdf',
+                    title: 'Unlock PDF',
+                    desc: 'Remove PDF password security.',
+                    icon: '🔓',
+                    accept: '.pdf',
+                    multiple: false
+                },
+                {
+                    id: 'protect-pdf',
+                    title: 'Protect PDF',
+                    desc: 'Encrypt your PDF with a password.',
+                    icon: '🔒',
+                    accept: '.pdf',
+                    multiple: false
+                },
+                {
+                    id: 'organize-pdf',
+                    title: 'Organize PDF',
+                    desc: 'Sort pages of your PDF file.',
+                    icon: '🏗️',
+                    accept: '.pdf',
+                    multiple: false
+                },
+                {
+                    id: 'pdf-to-pdfa',
+                    title: 'PDF to PDF/A',
+                    desc: 'Convert to PDF/A for archiving.',
+                    icon: '🏛️',
+                    accept: '.pdf',
+                    multiple: false
+                },
+                {
+                    id: 'repair-pdf',
+                    title: 'Repair PDF',
+                    desc: 'Recover data from a corrupted PDF.',
+                    icon: '🔧',
+                    accept: '.pdf',
+                    multiple: false
+                },
+                {
+                    id: 'page-numbers',
+                    title: 'Page Numbers',
+                    desc: 'Add page numbers into PDF.',
+                    icon: '🔢',
+                    accept: '.pdf',
+                    multiple: false
+                },
+                {
+                    id: 'ocr-pdf',
+                    title: 'OCR PDF',
+                    desc: 'Make scanned PDFs searchable.',
+                    icon: '👁️',
+                    accept: '.pdf',
+                    multiple: false
+                },
+                {
+                    id: 'compare-pdf',
+                    title: 'Compare PDF',
+                    desc: 'Show side-by-side comparison.',
+                    icon: '⚖️',
+                    accept: '.pdf',
+                    multiple: true
+                },
+                {
+                    id: 'redact-pdf',
+                    title: 'Redact PDF',
+                    desc: 'Permanently remove sensitive info.',
+                    icon: '⬛',
+                    accept: '.pdf',
+                    multiple: false
+                },
+                {
+                    id: 'crop-pdf',
+                    title: 'Crop PDF',
+                    desc: 'Crop margins of PDF pages.',
+                    icon: '✂️',
+                    accept: '.pdf',
+                    multiple: false
+                },
+                {
+                    id: 'html-to-pdf',
+                    title: 'HTML to PDF',
+                    desc: 'Convert webpages to PDF.',
+                    icon: '🌐',
+                    accept: '.html',
+                    multiple: false
                 }
+            ];
 
-                // Update navigation based on auth state
-                updateNavigation();
-            }
-
-            // Update navigation
-            function updateNavigation() {
-                const navUl = document.querySelector('.main-nav ul');
-                const existingAuthLi = document.querySelector('.main-nav ul .auth-buttons');
-                const existingUserLi = document.querySelector('.main-nav ul .user-profile-item');
-                
-                if (existingAuthLi) existingAuthLi.remove();
-                if (existingUserLi) existingUserLi.remove();
-
-                if (authState.isLoggedIn) {
-                    // Add user profile to navigation
-                    const userLi = document.createElement('li');
-                    userLi.className = 'user-profile-item';
-                    userLi.innerHTML = `
-                        <div class="user-profile" id="user-profile">
-                            <div class="profile-avatar" id="profile-avatar">${getAvatarText(authState.currentUser.name)}</div>
-                            <span class="profile-name" id="profile-name">${authState.currentUser.name}</span>
-                        </div>
-                    `;
-                    navUl.appendChild(userLi);
-                    
-                    // Add event listener to profile
-                    document.getElementById('user-profile').addEventListener('click', (e) => {
-                        e.stopPropagation();
-                        const dropdown = document.getElementById('user-profile-dropdown');
-                        dropdown.classList.toggle('active');
-                        
-                        // Update dropdown content
-                        document.getElementById('user-avatar-text').textContent = getAvatarText(authState.currentUser.name);
-                        document.getElementById('user-name').textContent = authState.currentUser.name;
-                        document.getElementById('user-email').textContent = authState.currentUser.email;
-                    });
-                } else {
-                    // Add auth buttons to navigation
-                    const authLi = document.createElement('li');
-                    authLi.className = 'auth-buttons';
-                    authLi.innerHTML = `
-                        <button class="btn-login" id="btn-login">Log In</button>
-                        <button class="btn-signup" id="btn-signup">Sign Up</button>
-                    `;
-                    navUl.appendChild(authLi);
-                    
-                    // Add event listeners to auth buttons
-                    document.getElementById('btn-login').addEventListener('click', () => showAuthModal('login'));
-                    document.getElementById('btn-signup').addEventListener('click', () => showAuthModal('signup'));
-                }
-            }
-
-            // Get avatar text from name
-            function getAvatarText(name) {
-                return name.split(' ').map(word => word[0]).join('').toUpperCase().slice(0, 2);
-            }
-
-            // Update UI for logged in user
-            function updateUIForLoggedInUser() {
-                updateNavigation();
-                
-                // Update user dropdown content
-                if (authState.currentUser) {
-                    document.getElementById('user-avatar-text').textContent = getAvatarText(authState.currentUser.name);
-                    document.getElementById('user-name').textContent = authState.currentUser.name;
-                    document.getElementById('user-email').textContent = authState.currentUser.email;
-                }
-            }
-
-            // Show auth modal
-            function showAuthModal(tab = 'login') {
-                const authModal = document.getElementById('auth-modal');
-                authModal.classList.add('active');
-                switchAuthTab(tab);
-            }
-
-            // Switch auth tab
-            function switchAuthTab(tab) {
-                // Update tabs
-                document.querySelectorAll('.auth-tab').forEach(t => {
-                    t.classList.remove('active');
-                    if (t.getAttribute('data-tab') === tab) {
-                        t.classList.add('active');
-                    }
-                });
-
-                // Show correct form
-                document.querySelectorAll('.auth-form').forEach(form => {
-                    form.classList.remove('active');
-                });
-
-                const forms = {
-                    'login': 'login-form',
-                    'signup': 'signup-form',
-                    'forgot-password': 'forgot-password-form'
-                };
-
-                if (forms[tab]) {
-                    document.getElementById(forms[tab]).classList.add('active');
-                }
-                
-                // Clear any existing messages
-                showAuthMessage('', '');
-            }
-
-            // Show auth message
-            function showAuthMessage(message, type) {
-                const messageEl = document.getElementById('auth-message');
-                messageEl.textContent = message;
-                messageEl.className = 'auth-message';
-                if (type) {
-                    messageEl.classList.add(type);
-                }
-            }
-
-            // Password validation
-            function validatePassword() {
-                const password = document.getElementById('signup-password').value;
-                const requirements = {
-                    length: password.length >= 8,
-                    uppercase: /[A-Z]/.test(password),
-                    number: /\d/.test(password),
-                    special: /[!@#$%^&*(),.?":{}|<>]/.test(password)
-                };
-
-                // Update UI for each requirement
-                Object.keys(requirements).forEach(req => {
-                    const element = document.getElementById(`req-${req}`);
-                    if (element) {
-                        if (requirements[req]) {
-                            element.classList.add('valid');
-                        } else {
-                            element.classList.remove('valid');
-                        }
-                    }
-                });
-
-                return Object.values(requirements).every(v => v);
-            }
-
-            // Handle login
-            function handleLogin(e) {
-                e.preventDefault();
-                
-                const email = document.getElementById('login-email').value;
-                const password = document.getElementById('login-password').value;
-
-                // Basic validation
-                if (!email || !password) {
-                    showAuthMessage('Please fill in all fields', 'error');
-                    return;
-                }
-
-                // Get users from localStorage
-                const users = JSON.parse(localStorage.getItem('pdfmasters_users') || '[]');
-                const user = users.find(u => u.email === email && u.password === password);
-
-                if (user) {
-                    // Successful login
-                    authState.isLoggedIn = true;
-                    authState.currentUser = {
-                        id: user.id,
-                        name: user.name,
-                        email: user.email,
-                        avatarText: getAvatarText(user.name)
-                    };
-
-                    // Save to localStorage
-                    localStorage.setItem('pdfmasters_user', JSON.stringify(authState.currentUser));
-
-                    // Update UI
-                    updateUIForLoggedInUser();
-                    
-                    // Close modal
-                    document.getElementById('auth-modal').classList.remove('active');
-                    
-                    // Show success message
-                    showAuthMessage('Successfully logged in!', 'success');
-                    
-                    // Clear form
-                    e.target.reset();
-                } else {
-                    showAuthMessage('Invalid email or password', 'error');
-                }
-            }
-
-            // Handle signup
-            function handleSignup(e) {
-                e.preventDefault();
-                
-                const name = document.getElementById('signup-name').value;
-                const email = document.getElementById('signup-email').value;
-                const password = document.getElementById('signup-password').value;
-                const confirmPassword = document.getElementById('confirm-password').value;
-                const agreeTerms = document.getElementById('agree-terms').checked;
-
-                // Validation
-                if (!name || !email || !password || !confirmPassword) {
-                    showAuthMessage('Please fill in all fields', 'error');
-                    return;
-                }
-
-                if (!validatePassword()) {
-                    showAuthMessage('Password does not meet requirements', 'error');
-                    return;
-                }
-
-                if (password !== confirmPassword) {
-                    showAuthMessage('Passwords do not match', 'error');
-                    return;
-                }
-
-                if (!agreeTerms) {
-                    showAuthMessage('Please agree to the terms and conditions', 'error');
-                    return;
-                }
-
-                // Check if user already exists
-                const users = JSON.parse(localStorage.getItem('pdfmasters_users') || '[]');
-                if (users.some(u => u.email === email)) {
-                    showAuthMessage('Email already registered', 'error');
-                    return;
-                }
-
-                // Create new user
-                const newUser = {
-                    id: Date.now().toString(),
-                    name,
-                    email,
-                    password, // In real app, hash this password
-                    createdAt: new Date().toISOString()
-                };
-
-                // Save user
-                users.push(newUser);
-                localStorage.setItem('pdfmasters_users', JSON.stringify(users));
-
-                // Auto login
-                authState.isLoggedIn = true;
-                authState.currentUser = {
-                    id: newUser.id,
-                    name: newUser.name,
-                    email: newUser.email,
-                    avatarText: getAvatarText(newUser.name)
-                };
-
-                // Save to localStorage
-                localStorage.setItem('pdfmasters_user', JSON.stringify(authState.currentUser));
-
-                // Update UI
-                updateUIForLoggedInUser();
-                
-                // Close modal
-                document.getElementById('auth-modal').classList.remove('active');
-                
-                // Show success message
-                    showAuthMessage('Account created successfully!', 'success');
-                    
-                    // Clear form
-                    e.target.reset();
-                }
-
-                // Handle forgot password
-                function handleForgotPassword(e) {
-                    e.preventDefault();
-                    
-                    const email = document.getElementById('forgot-email').value;
-                    
-                    if (!email) {
-                        showAuthMessage('Please enter your email address', 'error');
-                        return;
-                    }
-
-                    // In a real app, you would send an email here
-                    // For demo, just show success message
-                    showAuthMessage(`Password reset link sent to ${email}`, 'success');
-                    e.target.reset();
-                }
-
-                // Handle logout
-                function handleLogout(e) {
-                    e.preventDefault();
-                    
-                    authState.isLoggedIn = false;
-                    authState.currentUser = null;
-                    
-                    // Remove from localStorage
-                    localStorage.removeItem('pdfmasters_user');
-                    
-                    // Update UI
-                    updateNavigation();
-                    
-                    // Close dropdown
-                    document.getElementById('user-profile-dropdown').classList.remove('active');
-                    
-                    // Show message
-                    showAuthMessage('Successfully logged out', 'success');
-                }
-
-                // Initialize auth system
-                initAuthSystem();
-
-                // Auth Modal Toggle
-                document.getElementById('close-auth-modal').addEventListener('click', () => {
-                    document.getElementById('auth-modal').classList.remove('active');
-                });
-
-                // Tab Switching
-                document.querySelectorAll('.auth-tab').forEach(tab => {
-                    tab.addEventListener('click', () => {
-                        const tabName = tab.getAttribute('data-tab');
-                        switchAuthTab(tabName);
-                    });
-                });
-
-                // Show Password Toggle
-                document.getElementById('show-login-password').addEventListener('change', (e) => {
-                    const passwordInput = document.getElementById('login-password');
-                    passwordInput.type = e.target.checked ? 'text' : 'password';
-                });
-
-                document.getElementById('show-signup-password').addEventListener('change', (e) => {
-                    const passwordInput = document.getElementById('signup-password');
-                    const confirmInput = document.getElementById('confirm-password');
-                    passwordInput.type = e.target.checked ? 'text' : 'password';
-                    confirmInput.type = e.target.checked ? 'text' : 'password';
-                });
-
-                // Forgot Password Link
-                document.querySelector('.forgot-password').addEventListener('click', (e) => {
-                    e.preventDefault();
-                    switchAuthTab('forgot-password');
-                });
-
-                // Back to Login
-                document.querySelector('.back-to-login-btn').addEventListener('click', (e) => {
-                    e.preventDefault();
-                    switchAuthTab('login');
-                });
-
-                // Password Validation
-                const passwordInput = document.getElementById('signup-password');
-                if (passwordInput) {
-                    passwordInput.addEventListener('input', validatePassword);
-                }
-
-                // Form Submissions
-                document.getElementById('loginForm').addEventListener('submit', handleLogin);
-                document.getElementById('signupForm').addEventListener('submit', handleSignup);
-                document.getElementById('forgotPasswordForm').addEventListener('submit', handleForgotPassword);
-
-                // Social Login Buttons
-                document.querySelectorAll('.social-btn.google-btn').forEach(btn => {
-                    btn.addEventListener('click', () => {
-                        showAuthMessage('Google login would be implemented in production', 'success');
-                    });
-                });
-
-                document.querySelectorAll('.social-btn.facebook-btn').forEach(btn => {
-                    btn.addEventListener('click', () => {
-                        showAuthMessage('Facebook login would be implemented in production', 'success');
-                    });
-                });
-
-                // Logout
-                document.getElementById('btn-logout').addEventListener('click', handleLogout);
-
-                // Close dropdown when clicking outside
-                document.addEventListener('click', (e) => {
-                    const dropdown = document.getElementById('user-profile-dropdown');
-                    const userProfile = document.getElementById('user-profile');
-                    
-                    if (dropdown && userProfile) {
-                        if (!dropdown.contains(e.target) && !e.target.closest('#user-profile')) {
-                            dropdown.classList.remove('active');
-                        }
-                    }
-                });
+            // Load tools into grid
+            const toolsGrid = document.getElementById('tools-grid');
+            tools.forEach((tool, index) => {
+                const toolCard = document.createElement('div');
+                toolCard.className = 'tool-card';
+                toolCard.innerHTML = `
+                    <div class="icon">${tool.icon}</div>
+                    <h3>${tool.title}</h3>
+                    <p>${tool.desc}</p>
+                    ${index < 5 ? '<div class="new-badge">New!</div>' : ''}
+                `;
+                toolCard.addEventListener('click', () => openToolModal(tool));
+                toolsGrid.appendChild(toolCard);
             });
-        </script>
-        <script src="https://pl28359326.effectivegatecpm.com/fc/c0/bb/fcc0bb7014d58fae65b48f699210b1ac.js"></script>
-        <script src="https://pl28359589.effectivegatecpm.com/e1/1d/c7/e11dc7c24a7eb89fc32f9d75e1ecde9c.js"></script>
-       <script async="async" data-cfasync="false" src="https://pl28359614.effectivegatecpm.com/6084f650bfaa2dac1f9769326d1991ae/invoke.js"></script>
-    <div id="container-6084f650bfaa2dac1f9769326d1991ae"></div>
-        <script>
-      atOptions = {
-        'key' : '4e4b10166312035438a58ebd74f14ad1',
-        'format' : 'iframe',
-        'height' : 60,
-        'width' : 468,
-        'params' : {}
-      };
-    </script>
-    <script src="https://www.highperformanceformat.com/4e4b10166312035438a58ebd74f14ad1/invoke.js"></script>
 
-    </body>
-    </html>
+            // Modal Elements
+            const modal = document.getElementById('tool-modal');
+            const modalTitle = document.getElementById('modal-title');
+            const closeModal = document.getElementById('close-modal');
+            const dropZone = document.getElementById('drop-zone');
+            const fileInput = document.getElementById('file-input');
+            const fileList = document.getElementById('file-list');
+            const processBtn = document.getElementById('process-btn');
+            const outputArea = document.getElementById('output-area');
+            const loaderContainer = document.querySelector('.loader-container');
+
+            let currentTool = null;
+            let selectedFiles = [];
+
+            // Open Tool Modal
+            function openToolModal(tool) {
+                currentTool = tool;
+                selectedFiles = [];
+                modalTitle.textContent = tool.title;
+                fileInput.accept = tool.accept;
+                fileInput.multiple = tool.multiple;
+                fileList.innerHTML = '';
+                outputArea.innerHTML = '';
+                processBtn.disabled = true;
+                processBtn.textContent = 'Process';
+                
+                // Set tool-specific options
+                const toolOptions = document.getElementById('tool-options');
+                toolOptions.innerHTML = getToolOptions(tool.id);
+                
+                modal.classList.add('active');
+            }
+
+            // Get tool-specific options
+            function getToolOptions(toolId) {
+                const options = {
+                    'split-pdf': `
+                        <label>Page Ranges (e.g., "1-3, 5, 7-9"):</label>
+                        <input type="text" id="split-range" placeholder="e.g. 1, 3-5">
+                    `,
+                    'compress-pdf': `
+                        <label>Compression Level:</label>
+                        <input type="range" id="comp-quality" min="0.1" max="1.0" step="0.1" value="0.7">
+                        <span id="quality-value">70%</span>
+                    `,
+                    'watermark-pdf': `
+                        <label>Watermark Text:</label>
+                        <input type="text" id="wm-text" value="CONFIDENTIAL">
+                        <label>Opacity:</label>
+                        <input type="range" id="wm-opacity" min="0.1" max="1" step="0.1" value="0.3">
+                    `,
+                    'rotate-pdf': `
+                        <label>Rotation:</label>
+                        <select id="rot-deg">
+                            <option value="90">90° Clockwise</option>
+                            <option value="180">180°</option>
+                            <option value="270">270° Clockwise</option>
+                        </select>
+                    `,
+                    'unlock-pdf': `
+                        <label>PDF Password:</label>
+                        <input type="password" id="pdf-password" placeholder="Enter PDF password">
+                    `,
+                    'protect-pdf': `
+                        <label>Password:</label>
+                        <input type="password" id="protect-password" placeholder="Enter password">
+                        <label>Confirm Password:</label>
+                        <input type="password" id="confirm-password" placeholder="Confirm password">
+                    `
+                };
+                return options[toolId] || '';
+            }
+
+            // Close Modal
+            closeModal.addEventListener('click', () => {
+                modal.classList.remove('active');
+            });
+
+            // File Selection
+            dropZone.addEventListener('click', () => fileInput.click());
+            dropZone.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                dropZone.classList.add('dragover');
+            });
+            dropZone.addEventListener('dragleave', () => {
+                dropZone.classList.remove('dragover');
+            });
+            dropZone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                dropZone.classList.remove('dragover');
+                handleFiles(e.dataTransfer.files);
+            });
+            fileInput.addEventListener('change', (e) => {
+                handleFiles(e.target.files);
+            });
+
+            function handleFiles(files) {
+                if (currentTool.multiple) {
+                    selectedFiles = [...selectedFiles, ...Array.from(files)];
+                } else {
+                    selectedFiles = [files[0]];
+                }
+                updateFileList();
+                processBtn.disabled = selectedFiles.length === 0;
+            }
+
+            function updateFileList() {
+                fileList.innerHTML = '';
+                selectedFiles.forEach((file, index) => {
+                    const li = document.createElement('li');
+                    li.innerHTML = `
+                        ${file.name} (${formatBytes(file.size)})
+                        <span class="remove" data-index="${index}">×</span>
+                    `;
+                    fileList.appendChild(li);
+                });
+
+                // Add remove functionality
+                document.querySelectorAll('#file-list .remove').forEach(removeBtn => {
+                    removeBtn.addEventListener('click', (e) => {
+                        const index = parseInt(e.target.dataset.index);
+                        selectedFiles.splice(index, 1);
+                        updateFileList();
+                        processBtn.disabled = selectedFiles.length === 0;
+                    });
+                });
+            }
+
+            // Process Button
+            processBtn.addEventListener('click', async () => {
+                if (selectedFiles.length === 0) return;
+                
+                showLoader();
+                try {
+                    await processTool();
+                } catch (error) {
+                    console.error('Processing error:', error);
+                    outputArea.innerHTML = `<p style="color: var(--danger-color);">Error: ${error.message}</p>`;
+                } finally {
+                    hideLoader();
+                }
+            });
+
+            // Tool Processing
+            async function processTool() {
+                const { PDFDocument, rgb, degrees, StandardFonts } = PDFLib;
+                
+                switch(currentTool.id) {
+                    case 'merge-pdf':
+                        await mergePDFs();
+                        break;
+                    case 'split-pdf':
+                        await splitPDF();
+                        break;
+                    case 'compress-pdf':
+                        await compressPDF();
+                        break;
+                    case 'pdf-to-word':
+                        await pdfToWord();
+                        break;
+                    case 'jpg-to-pdf':
+                        await jpgToPDF();
+                        break;
+                    case 'watermark-pdf':
+                        await watermarkPDF();
+                        break;
+                    case 'rotate-pdf':
+                        await rotatePDF();
+                        break;
+                    default:
+                        outputArea.innerHTML = `<p>${currentTool.title} functionality coming soon!</p>`;
+                }
+            }
+
+            // Tool Implementations
+            async function mergePDFs() {
+                const mergedPdf = await PDFDocument.create();
+                
+                for (const file of selectedFiles) {
+                    const bytes = await readFileAsArrayBuffer(file);
+                    const pdf = await PDFDocument.load(bytes);
+                    const copiedPages = await mergedPdf.copyPages(pdf, pdf.getPageIndices());
+                    copiedPages.forEach(page => mergedPdf.addPage(page));
+                }
+                
+                const pdfBytes = await mergedPdf.save();
+                createDownloadLink(pdfBytes, 'merged.pdf', 'application/pdf');
+            }
+
+            async function splitPDF() {
+                const rangeStr = document.getElementById('split-range')?.value;
+                if (!rangeStr) throw new Error('Please enter page ranges');
+                
+                const bytes = await readFileAsArrayBuffer(selectedFiles[0]);
+                const pdfDoc = await PDFDocument.load(bytes);
+                const totalPages = pdfDoc.getPageCount();
+                
+                const pagesToCopy = parsePageRanges(rangeStr, totalPages);
+                const newPdf = await PDFDocument.create();
+                const copiedPages = await newPdf.copyPages(pdfDoc, pagesToCopy);
+                copiedPages.forEach(page => newPdf.addPage(page));
+                
+                const pdfBytes = await newPdf.save();
+                createDownloadLink(pdfBytes, 'split.pdf', 'application/pdf');
+            }
+
+            async function compressPDF() {
+                const quality = parseFloat(document.getElementById('comp-quality')?.value || 0.7);
+                const bytes = await readFileAsArrayBuffer(selectedFiles[0]);
+                const pdfDoc = await PDFDocument.load(bytes);
+                
+                // Simple compression by re-saving
+                const pdfBytes = await pdfDoc.save({
+                    useObjectStreams: true,
+                    addDefaultPage: false
+                });
+                
+                createDownloadLink(pdfBytes, 'compressed.pdf', 'application/pdf');
+            }
+
+            async function pdfToWord() {
+                const data = await readFileAsArrayBuffer(selectedFiles[0]);
+                const pdf = await pdfjsLib.getDocument({data}).promise;
+                let text = "";
+                
+                for (let i = 1; i <= pdf.numPages; i++) {
+                    const page = await pdf.getPage(i);
+                    const content = await page.getTextContent();
+                    const strings = content.items.map(item => item.str);
+                    text += strings.join(" ") + "\n\n";
+                }
+                
+                const blob = new Blob([text], { type: 'text/plain' });
+                createDownloadLink(blob, 'converted.txt');
+            }
+
+            async function jpgToPDF() {
+                const pdfDoc = await PDFDocument.create();
+                
+                for (const file of selectedFiles) {
+                    const bytes = await readFileAsArrayBuffer(file);
+                    let image;
+                    if (file.type === 'image/jpeg') {
+                        image = await pdfDoc.embedJpg(bytes);
+                    } else {
+                        image = await pdfDoc.embedPng(bytes);
+                    }
+                    
+                    const page = pdfDoc.addPage([image.width, image.height]);
+                    page.drawImage(image, {
+                        x: 0, y: 0, 
+                        width: image.width, 
+                        height: image.height
+                    });
+                }
+                
+                const pdfBytes = await pdfDoc.save();
+                createDownloadLink(pdfBytes, 'images.pdf', 'application/pdf');
+            }
+
+            async function watermarkPDF() {
+                const text = document.getElementById('wm-text')?.value || 'CONFIDENTIAL';
+                const opacity = parseFloat(document.getElementById('wm-opacity')?.value || 0.3);
+                
+                const bytes = await readFileAsArrayBuffer(selectedFiles[0]);
+                const pdfDoc = await PDFDocument.load(bytes);
+                const font = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
+                
+                const pages = pdfDoc.getPages();
+                for (const page of pages) {
+                    const { width, height } = page.getSize();
+                    page.drawText(text, {
+                        x: width / 4,
+                        y: height / 2,
+                        size: 50,
+                        font: font,
+                        color: rgb(0.5, 0.5, 0.5),
+                        opacity: opacity,
+                        rotate: degrees(45),
+                    });
+                }
+                
+                const pdfBytes = await pdfDoc.save();
+                createDownloadLink(pdfBytes, 'watermarked.pdf', 'application/pdf');
+            }
+
+            async function rotatePDF() {
+                const angle = parseInt(document.getElementById('rot-deg')?.value || 90);
+                
+                const bytes = await readFileAsArrayBuffer(selectedFiles[0]);
+                const pdfDoc = await PDFDocument.load(bytes);
+                const pages = pdfDoc.getPages();
+                
+                pages.forEach(page => {
+                    const current = page.getRotation().angle;
+                    page.setRotation(degrees(current + angle));
+                });
+                
+                const pdfBytes = await pdfDoc.save();
+                createDownloadLink(pdfBytes, 'rotated.pdf', 'application/pdf');
+            }
+
+            // Utility Functions
+            function readFileAsArrayBuffer(file) {
+                return new Promise((resolve, reject) => {
+                    const reader = new FileReader();
+                    reader.onload = () => resolve(reader.result);
+                    reader.onerror = reject;
+                    reader.readAsArrayBuffer(file);
+                });
+            }
+
+            function parsePageRanges(rangeStr, totalPages) {
+                const pages = new Set();
+                rangeStr.split(',').forEach(part => {
+                    const range = part.trim().split('-');
+                    if (range.length === 2) {
+                        const start = parseInt(range[0]);
+                        const end = parseInt(range[1]);
+                        if (!isNaN(start) && !isNaN(end)) {
+                            for (let i = Math.min(start, end); i <= Math.max(start, end); i++) {
+                                if (i >= 1 && i <= totalPages) pages.add(i - 1);
+                            }
+                        }
+                    } else {
+                        const page = parseInt(range[0]);
+                        if (!isNaN(page) && page >= 1 && page <= totalPages) {
+                            pages.add(page - 1);
+                        }
+                    }
+                });
+                return Array.from(pages);
+            }
+
+            function formatBytes(bytes, decimals = 2) {
+                if (bytes === 0) return '0 Bytes';
+                const k = 1024;
+                const dm = decimals < 0 ? 0 : decimals;
+                const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+                const i = Math.floor(Math.log(bytes) / Math.log(k));
+                return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+            }
+
+            function createDownloadLink(data, filename, type = 'application/octet-stream') {
+                const blob = data instanceof Blob ? data : new Blob([data], { type });
+                const url = URL.createObjectURL(blob);
+                outputArea.innerHTML = `
+                    <a href="${url}" download="${filename}" class="download-link">
+                        Download ${filename}
+                    </a>
+                `;
+            }
+
+            function showLoader() {
+                loaderContainer.classList.add('active');
+                processBtn.disabled = true;
+            }
+
+            function hideLoader() {
+                loaderContainer.classList.remove('active');
+                processBtn.disabled = false;
+            }
+
+            // Header scroll effect
+            window.addEventListener('scroll', () => {
+                const header = document.getElementById('main-header');
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
